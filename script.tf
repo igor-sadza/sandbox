@@ -1,12 +1,12 @@
 #Global connection settings
 terraform {
-  provisioner "remote-exec" {
+  provisioners "remote-exec" {
     connection {
-      type 	      = "ssh" 
-      user 	      = var.user 
-      password  	= var.pass 
-      host 	      = var.host 
-      port 	      = var.port 
+      type = "ssh" 
+      user = var.user 
+      password = var.pass 
+      host = var.host 
+      port = var.port 
     }
   }
 }
@@ -16,8 +16,8 @@ resource "null_resource" "provisioners" {
 
   # move scripts to /tmp 
   provisioner "file" {
-    source        = "scripts"
-    destination   = "/tmp"
+    source = "scripts"
+    destination = "/tmp"
   }
 
   # initial setup
@@ -28,5 +28,4 @@ resource "null_resource" "provisioners" {
       "/tmp/scripts/install_gpu_drivers.sh",
     ]
   }
-
 }
