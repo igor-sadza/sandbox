@@ -1,16 +1,3 @@
-#Global connection settings
-terraform {
-  provisioners "remote-exec" {
-    connection {
-      type = "ssh" 
-      user = var.user 
-      password = var.pass 
-      host = var.host 
-      port = var.port 
-    }
-  }
-}
-
 #Provision the app onto the system
 resource "null_resource" "provisioners" { 
 
@@ -18,6 +5,13 @@ resource "null_resource" "provisioners" {
   provisioner "file" {
     source = "scripts"
     destination = "/tmp"
+    connection {
+      type = "ssh" 
+      user = var.user 
+      password = var.pass 
+      host = var.host 
+      port = var.port 
+    }
   }
 
   # initial setup
@@ -27,5 +21,12 @@ resource "null_resource" "provisioners" {
       "chmod +x /tmp/scripts*/*",
       "/tmp/scripts/install_gpu_drivers.sh",
     ]
+    connection {
+      type = "ssh" 
+      user = var.user 
+      password = var.pass 
+      host = var.host 
+      port = var.port 
+    }
   }
 }
