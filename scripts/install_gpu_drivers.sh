@@ -53,6 +53,3 @@ function_execute_runfile
 else
   echo "Nvidia drivers installed on machine already. Skipping install of drivers."
 fi
-
-systemctl is-active nvidia-persistenced || systemctl enable nvidia-persistenced
-
