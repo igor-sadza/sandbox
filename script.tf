@@ -19,7 +19,7 @@ resource "null_resource" "provisioners" {
     inline = [
       "set -e",
       "chmod +x /tmp/scripts*/*",
-      "/tmp/scripts/install_gpu_drivers.sh",
+      "/tmp/scripts/install_gpu_drivers.sh"
     ]
     connection {
       type = "ssh" 
