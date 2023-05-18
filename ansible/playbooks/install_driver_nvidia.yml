@@ -3,6 +3,17 @@
   become: yes
 
   tasks:
+    - name: Install packages on Ubuntu
+      apt:
+        name: 
+          - linux-headers-{{ ansible_kernel }}
+          - make 
+          - gcc-multilib 
+          - dkms
+        state: present  # 'present' ensures the packages are installed
+      when: ansible_os_family == 'Debian'  # Only run on Debian-based systems (e.g., Ubuntu)
+
+
     - name: Get latest nvidia driver url package 
       shell:
         cmd: |
