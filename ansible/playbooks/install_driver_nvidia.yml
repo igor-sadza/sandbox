@@ -6,6 +6,7 @@
     - name: Install packages on Ubuntu
       apt:
         name: 
+          - linux-headers-{{ ansible_kernel }}
           - make 
           - gcc-multilib 
           - dkms
@@ -54,6 +55,7 @@
       shell:
         cmd: |
           ./nvidia-driver.run         \
+            --dkms                    \
             --ui=none --no-questions  \
             --accept-license          \
             --disable-nouveau         \
