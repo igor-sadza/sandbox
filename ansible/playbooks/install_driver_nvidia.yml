@@ -41,8 +41,12 @@
         line: "blacklist nouveau"
         create: yes
 
+    - name: Unbind VTconsole
+      shell:
+        cmd: |
+           echo 0 > /sys/class/vtconsole/vtcon1/bind
+
     - name: Disable nouveau module
-      command: echo 0 > /sys/class/vtconsole/vtcon1/bind
       modprobe:
         name: nouveau
         state: absent
