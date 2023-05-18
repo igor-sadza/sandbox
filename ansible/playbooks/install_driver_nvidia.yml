@@ -1,0 +1,52 @@
+- name: Install Nvidia driver
+  hosts: localhost
+  become: yes
+
+  tasks:
+    - name: Get latest nvidia driver url package 
+      shell:
+        cmd: |
+          v_baseUrl="https://download.nvidia.com/XFree86/Linux-x86_64"
+          v_latestDriver="$(
+            curl --silent \
+              "${v_baseUrl}/latest.txt" | sed 's/.* //g'
+          )";
+          echo "${v_baseUrl}/${v_latestDriver}"
+      register: urlDriverLatest 
+
+    - name: Download latest nvida driver 
+      get_url:
+        url: "{{ urlDriverLatest.stdout }}"  # Replace with the actual download URL
+        dest: "/tmp/nvidia-driver.run"
+        mode: '0755'
+      register: download_result
+      until: download_result is succeeded
+      retries: 5
+      delay: 10
+
+    - name: Add nouveau to blacklist
+      lineinfile:
+        dest: /etc/modprobe.d/blacklist.conf
+        line: "blacklist nouveau"
+        create: yes
+
+    - name: Disable nouveau module
+      command: echo 0 > /sys/class/vtconsole/vtcon1/bind
+      modprobe:
+        name: nouveau
+        state: absent
+
+    - name: Run Nvidia driver installer
+      shell:
+        cmd: |
+          ./nvidia-driver.run         \
+            --ui=none --no-questions  \
+            --accept-license          \
+            --disable-nouveau         \
+            --no-cc-version-check     \
+            --install-libglvnd  2>&1
+      args:
+        chdir: /tmp
+
+    - name: Reboot the system
+      reboot:
