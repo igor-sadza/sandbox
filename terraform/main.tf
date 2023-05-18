@@ -3,10 +3,10 @@ resource "null_resource" "provisioners" {
   # ssh connection block 
   connection {
     type      = "ssh" 
-    user      = var.ssh.user 
-    password  = var.ssh.pass 
-    host      = var.ssh.host 
-    port      = var.ssh.port 
+    user      = var.ssh-user 
+    password  = var.ssh-pass 
+    host      = var.ssh-host 
+    port      = var.ssh-port 
   }
 
   # move to /tmp ~ ansible 
