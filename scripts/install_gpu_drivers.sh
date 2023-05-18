@@ -16,18 +16,13 @@ function_requirements() {
 };
 
 function_get_latest_driver() {
-
   local v_baseUrl="https://download.nvidia.com/XFree86/Linux-x86_64"
-
   local v_latestDriver="$(
     curl --silent \
       "${v_baseUrl}/latest.txt" | sed 's/.* //g'
   )";
-
   curl --silent "${v_baseUrl}/${v_latestDriver}" -o nvidia.run
-
   chmod 0775 nvidia.run
-
 };
 
 function_execute_runfile() {
@@ -39,17 +34,21 @@ function_execute_runfile() {
     --install-libglvnd  2>&1
 };
 
-## Install NVIDIA Driver
-modinfo nvidia && which nvidia-smi
-has_gpu_driver=$?
+function_main() {
 
-if [ $has_gpu_driver -ne 0 ]; then
+  modinfo nvidia && which nvidia-smi
+  has_gpu_driver=$?
+  
+  if [ $has_gpu_driver -ne 1 ]; then
+    echo "Nvidia drivers installed on machine already. Skipping install of drivers."
+    return 0;
+  fi
 
-function_blacklist_nouveau
-function_requirements
-function_get_latest_driver
-function_execute_runfile
+  function_blacklist_nouveau
+  function_requirements
+  function_get_latest_driver
+  function_execute_runfile
+  
+};
 
-else
-  echo "Nvidia drivers installed on machine already. Skipping install of drivers."
-fi
+function_main
