@@ -3,6 +3,7 @@
 function_blacklist_nouveau() {
   echo -e "blacklist nouveau\noptions nouveau modeset=0" >> /etc/modprobe.d/blacklist.conf
   sudo update-initramfs -u
+  sudo rmmod nouveau
 };
 
 function_requirements() {
