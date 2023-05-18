@@ -20,7 +20,7 @@ resource "null_resource" "main" {
     inline = [
       "apt-get update -qq",
       "apt install -y -qq software-properties-common",
-      "apt-add-repository ppa:ansible/ansible",
+      "apt-add-repository -y ppa:ansible/ansible",
       "apt-get install -y -qq ansible"     
     ]
   }
