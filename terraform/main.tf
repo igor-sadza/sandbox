@@ -11,7 +11,7 @@ resource "null_resource" "main" {
 
   # move to /tmp ~ ansible 
   provisioner "file" {
-    source = "ansible"
+    source = "./ansible"
     destination = "/tmp"
   }
 
@@ -20,7 +20,7 @@ resource "null_resource" "main" {
     inline = [
       "apt-get update -qq",
       "apt install software-properties-common",
-			"apt-add-repository ppa:ansible/ansible",
+      "apt-add-repository ppa:ansible/ansible",
       "apt-get install -y -qq ansible",     
     ]
   }
