@@ -18,10 +18,10 @@ resource "null_resource" "main" {
   # install ansible 
   provisioner "remote-exec"  {
     inline = [
-      "apt-get update -qq",
+      "apt-get -o Dpkg::Use-Pty=0 update -qq",
       "apt install software-properties-common",
       "apt-add-repository ppa:ansible/ansible",
-      "apt-get install -y -qq ansible",     
+      "apt-get install -o Dpkg::Use-Pty=0 -qq ansible"     
     ]
   }
   
