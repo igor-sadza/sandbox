@@ -1,13 +1,14 @@
 - name: Install Nvidia driver
   hosts: localhost
+  connection: local
   become: yes
 
   tasks:
-    - name: Update apt cache
+    - name: apt update 
       apt:
         update_cache: yes
 
-    - name: Install packages on Ubuntu
+    - name: apt install 
       apt:
         name: 
           - linux-headers-{{ ansible_kernel }}
