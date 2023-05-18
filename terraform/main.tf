@@ -28,7 +28,7 @@ resource "null_resource" "main" {
   # execute ansible 
   provisioner "remote-exec"  {
     inline = [
-      "ansible-playbook -i localhost, /tmp/ansible/playbooks/install_driver_nvidia.yml"
+      "ansible-playbook /tmp/ansible/playbooks/install_driver_nvidia.yml"
     ]
   }
 }
