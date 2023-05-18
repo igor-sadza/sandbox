@@ -11,8 +11,8 @@ resource "null_resource" "main" {
 
   # move to /tmp ~ ansible 
   provisioner "file" {
-    source = "./ansible"
-    destination = "/tmp"
+    source        = "./ansible/"
+    destination   = "/tmp"
   }
 
   # install ansible 
