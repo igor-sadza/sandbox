@@ -58,10 +58,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     env:
-      TF_VAR_host: ${{secrets.TF_VAR_host}}
-      TF_VAR_port: ${{secrets.TF_VAR_port}}
-      TF_VAR_user: ${{secrets.TF_VAR_user}}
-      TF_VAR_pass: ${{secrets.TF_VAR_pass}}
+      TF_VAR_ssh-host: ${{secrets.TF_VAR_host}}
+      TF_VAR_ssh-port: ${{secrets.TF_VAR_port}}
+      TF_VAR_ssh-user: ${{secrets.TF_VAR_user}}
+      TF_VAR_ssh-pass: ${{secrets.TF_VAR_pass}}
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
