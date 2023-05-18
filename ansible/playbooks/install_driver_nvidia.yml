@@ -6,7 +6,6 @@
     - name: Install packages on Ubuntu
       apt:
         name: 
-          - linux-headers-{{ ansible_kernel }}
           - make 
           - gcc-multilib 
           - dkms
