@@ -70,4 +70,6 @@
         chdir: /tmp
 
     - name: Reboot the system
-      reboot:
+      shell:
+        cmd: |
+          reboot 
