@@ -68,8 +68,3 @@
             --install-libglvnd  2>&1
       args:
         chdir: /tmp
-
-    - name: Reboot the system
-      shell:
-        cmd: |
-          reboot 
