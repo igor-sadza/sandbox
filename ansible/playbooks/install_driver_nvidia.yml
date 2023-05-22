@@ -1,6 +1,5 @@
 - name: Install Nvidia driver
-  hosts: localhost
-  connection: local
+  hosts: pve 
   become: yes
 
   tasks:

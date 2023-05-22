@@ -1,0 +1,7 @@
+all:
+  hosts:
+    pve:
+      ansible_host:       "{{ lookup('env', 'TF_VAR_ssh_host') }}"
+      ansible_port:       "{{ lookup('env', 'TF_VAR_ssh_port') }}"
+      ansible_user:       "{{ lookup('env', 'TF_VAR_ssh_user') }}"
+      ansible_password:   "{{ lookup('env', 'TF_VAR_ssh_pass') }}"
