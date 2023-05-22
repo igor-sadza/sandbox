@@ -1,8 +1,20 @@
 - name: Install Nvidia driver
   hosts: pve 
   become: yes
+  gather_facts: yes
 
   tasks:
+
+    - name: Gather system facts
+      setup:   
+
+
+    - name: Presence - Nvidia
+      debug:
+        msg: "Nvidia driver is installed"
+      when: "'nvidia' in ansible_facts['ansible_devides']"
+
+
     - name: apt update 
       apt:
         update_cache: yes
